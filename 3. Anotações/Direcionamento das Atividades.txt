@@ -1,0 +1,48 @@
+*Precificação - Serviços Iniciais*
+
+Documento(s) requisitado(s): entradas no fluxo de caixa.
+Variáveis: (i) preço; (ii) quantidade; (iii) descrição; e (iv) data e hora da transação.
+
+# Análise exploratória:
+- Preços;
+- Quantidades;
+- Distribuições;
+- Receitas acumuladas; e
+- Receitas sazonais.
+
+# Forecasting e relacionados:
+- Decomposição de sazonalidade, tendência e erro;
+- Seasonal Autoregressive Integrated Moving Average (SARIMA); e
+- Generalized Additive Model (GAM).
+
+# Inferência causal:
+- Regressão Logística (Log-Log); e
+- Modelo de Variáveis Instrumentais, Mínimos Quadrados em Dois Estágios (MQ2E).
+
+# Gestão de riscos:
+- Value at Risk (VaR); e
+- Expected Shortfall.
+
+# Entregáveis:
+- Streamlit; e
+- Reportlab.
+
+
+
+*Precificação - Serviços Finais*
+
+Documento(s) requisitado(s): [Pendência].
+Variáveis: (i) preço; (ii) quantidade; (iii) descrição; (iv) data e hora da transação;
+           (v) notas fiscais de fornecedores; e (vi) conta de energia elétrica, aluguel, folha salarial e outros.
+
+# Constituição de cenários:
+- Demandas inversas ajustadas (± 1,5 desvio-padrão).
+
+# Contábil:
+- Esperança da receita subtraída ao custo variável — lucro esperado;
+- Rateio do custo fixo por representatividade na receita real;
+- Derivada igual a zero do lucro esperado por item (iteração), otimização; e
+- Preço ideal e resultados potenciais.
+
+# Entregáveis:
+- Reportlab.
