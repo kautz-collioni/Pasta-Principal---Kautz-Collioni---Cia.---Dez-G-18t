@@ -1,0 +1,5 @@
+Tamanho do Slide: 100x100;
+Tamanho da Fonte: 325;
+Cor: #000014 (azul escuro); #4b7bec (azul claro); #ff3b05 (laranja); #31333f (cinza escuro); #a4a5ad (cinza claro);
+Espaçamento entre Linhas: 325; e
+Parágrafo: alinhamento centralizado.

@@ -1,0 +1,11 @@
+@media print {
+    button[class="print-button"] {
+        display: none !important;
+    }
+
+    .graph-container {
+            page-break-inside: avoid !important;
+            break-inside: avoid-page !important;
+            display: block !important;
+    }
+}
