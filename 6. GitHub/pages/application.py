@@ -157,9 +157,14 @@ def main_app():
         }
 
         .graph-container {
+<<<<<<< HEAD
             page-break-inside: avoid !important;
             break-inside: avoid-page !important;
             display: block !important;
+=======
+            page-break-inside: avoid;
+            break-inside: avoid-page;
+>>>>>>> d81ef2872abd2b21d3db12bc343fab4c7e4ba35a
         }
     }
     </style>
