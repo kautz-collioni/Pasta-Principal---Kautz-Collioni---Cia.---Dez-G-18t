@@ -119,4 +119,4 @@ def login_page():
 if not st.session_state.get('logged_in', False):
     login_page()
 else:
-    st.switch_page("pages/Application.py")
+    st.switch_page("pages/application.py")
