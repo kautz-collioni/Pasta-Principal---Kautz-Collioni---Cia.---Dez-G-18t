@@ -87,7 +87,8 @@ def main_app():
         st.button("Botão Invisível", key="stButton-invisible_btn", on_click=go_to_homepage)
 
         # User greeting
-        st.markdown(f'<div class="user-greeting">Olá, {st.session_state.username}!</div>', unsafe_allow_html = True)
+        first_name = st.session_state.username.split()[0]
+        st.markdown(f'<div class="user-greeting">Olá, {first_name}!</div>', unsafe_allow_html = True)
         
         # Navigation menu - Sidebar buttons
         sidebar_options = ["Área Inicial", "Análise Exploratória", "Forecasting", "Fluxo de Caixa", "Avaliação", "Contato"]
@@ -156,7 +157,7 @@ def main_app():
             display: none !important;
         }
 
-        .graph-container {
+        .svg-container {
             page-break-inside: avoid !important;
             break-inside: avoid-page !important;
             display: block !important;
