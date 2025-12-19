@@ -124,6 +124,7 @@ def main_app():
     # ======================== PRINT BUTTON ========================
 
     print_button = """
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
     button[class="print-button"] {
         padding: 10px 15px;
@@ -185,11 +186,12 @@ def main_app():
         onclick="printReport();" 
         class="print-button"
     >
-        Imprimir
+    <i class="fa-solid fa-print"; style="font-size: 30px;"></i>
+
     </button>
     """
 
-    if not st.session_state.current_section == "Área Inicial":
+    if st.session_state.current_section not in ["Área Inicial", "Contato"]:
 
         components.html(print_button, height = 80)
 
@@ -202,47 +204,83 @@ def main_app():
 
         st.markdown('<div class="graph-container">', unsafe_allow_html = True)
 
-        st.caption(f"Database do relatório: :blue[10/10/2025]")
+        st.caption(f"Database do relatório: :blue[10/10/2025].")
 
-        st.subheader("Visão Geral do Negócio")
+        st.subheader("Quadro Geral")
         m1, m2, m3 = st.columns(3)
         with m1:
-            st.metric(label="Lojas Ativas", value="50", delta="Brasil")
+            st.metric(label="Lojas Ativas", value="50", delta_color="normal", delta="+5")
         with m2:
-            st.metric(label="Colaboradores", value="2.000", delta="Full-time")
+            st.metric(label="Colaboradores", value="2.000", delta="+100", delta_color="normal")
         with m3:
-            st.metric(label="Target de Receita", value="R$ 2B - 5B", delta="Anual")
+            st.metric(label="Target de Receita", value="R$ 2B - 5B", delta="+300M", delta_color="normal")
 
         st.divider()
 
         col1, col2 = st.columns([1.2, 0.8], gap="large")
 
         with col1:
-            st.subheader("🎯 Objetivos e Metas")
+            st.subheader("🎯 Objetivos")
             
             with st.container(border=True):
                 st.markdown("**Performance Financeira**")
-                st.progress(0.15, text="Meta: +15% Receita Líquida")
-                st.progress(0.05, text="Meta: +5pp Margem Líquida")
+                st.progress(0.15, text="**Meta:** +15% receita líquida")
+                st.progress(0.05, text="**Meta:** +5pp margem líquida")
                 
             with st.container(border=True):
                 st.markdown("**Operações e Eficiência**")
                 st.info("Reduzir custos operacionais em 10% através de iniciativas de eficiência.")
                 
             with st.container(border=True):
-                st.markdown("**Mercado e Digital**")
-                tab1, tab2 = st.tabs(["Eletrificação", "Digital Sales"])
+                st.markdown("**Histórico de Reuniões**")
+                tab1, tab2, tab3, tab4, tab5 = st.tabs(["20/10/2025", "20/09/2025", "20/08/2025", "20/07/2025", "20/06/2025"])
                 with tab1:
-                    st.write("Expandir market share em 5% no segmento EV.")
+                    st.write("""
+                            • Análise da evolução recente dos principais indicadores contábeis.\n
+                            • Identificação de desvios relevantes em relação ao planejamento estratégico.\n
+                            • Discussão sobre margens operacionais e estrutura de custos.\n
+                            • Avaliação da sustentabilidade do fluxo de caixa no curto prazo.\n
+                            • Definição de recomendações para ajuste de metas financeiras.\n
+                            """)
                 with tab2:
-                    st.write("Aumento de 25% nas vendas online.")
+                    st.write("""
+                            • Exame da composição atual do passivo financeiro.\n
+                            • Avaliação do perfil de vencimentos e custos da dívida.\n
+                            • Discussão sobre riscos associados à alavancagem.\n
+                            • Análise de alternativas de refinanciamento.\n
+                            • Deliberação sobre diretrizes para otimização da estrutura de capital.\n
+                            """)
+                with tab3:
+                    st.write("""
+                            • Apresentação de cenários macroeconômicos prospectivos.\n
+                            • Avaliação dos efeitos esperados sobre o setor de atuação.\n
+                            • Discussão sobre sensibilidade a variáveis externas relevantes.\n
+                            • Identificação de riscos e oportunidades conjunturais.\n
+                            • Alinhamento das premissas para planejamento financeiro.\n
+                            """)
+                with tab4:
+                    st.write("""
+                            • Revisão das premissas econômicas dos projetos em estudo.\n
+                            • Avaliação de retornos esperados e riscos associados.\n
+                            • Comparação entre alternativas de alocação de recursos.\n
+                            • Discussão sobre impactos no caixa e no endividamento.\n
+                            • Emissão de parecer técnico para suporte à decisão.\n
+                            """)
+                with tab5:
+                    st.write("""
+                            • Avaliação dos processos atuais de controle financeiro.\n
+                            • Identificação de fragilidades operacionais relevantes.\n
+                            • Discussão sobre aderência a boas práticas de governança.\n
+                            • Proposição de melhorias nos mecanismos de monitoramento.\n
+                            • Definição de encaminhamentos para implementação gradual.\n
+                            """)                
 
         with col2:
             st.subheader("🏢 Perfil Institucional")
             
-            with st.status("Detalhes da Corporação", expanded=True):
-                st.write("**Segmento:** Indústria Automotiva")
-                st.write("**Sede:** São Paulo, Brasil")
+            with st.status("Detalhes da Empresa", expanded=True):
+                st.write("**Segmento:** indústria automotiva.")
+                st.write("**Sede:** São Paulo, Brasil.")
                 
             st.markdown("---")
 
