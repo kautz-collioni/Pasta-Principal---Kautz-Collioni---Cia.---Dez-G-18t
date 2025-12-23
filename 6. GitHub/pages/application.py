@@ -91,7 +91,7 @@ def main_app():
         st.markdown(f'<div class="user-greeting">Olá, {first_name}!</div>', unsafe_allow_html = True)
         
         # Navigation menu - Sidebar buttons
-        sidebar_options = ["Área Inicial", "Análise Exploratória", "Forecasting", "Fluxo de Caixa", "Avaliação", "Contato"]
+        sidebar_options = ["Área Inicial", "Sumário Executivo", "Projeção Gerencial", "Fluxo de Caixa", "Viabilidade Econômica", "Contatos"]
         
         try:
             current_index = sidebar_options.index(st.session_state.current_section)
@@ -191,9 +191,9 @@ def main_app():
     </button>
     """
 
-    if st.session_state.current_section not in ["Área Inicial", "Contato"]:
-
-        components.html(print_button, height = 80)
+    if not st.session_state.current_section == "Área Inicial":
+        if not st.session_state.current_section == "Contatos":
+            components.html(print_button, height = 80)
 
     load_css("styles/print_button_style.css")
 
@@ -204,7 +204,7 @@ def main_app():
 
         st.markdown('<div class="graph-container">', unsafe_allow_html = True)
 
-        st.caption(f"Database do relatório: :blue[10/10/2025].")
+        st.caption(f"Última atualização: :blue[10/10/2025].")
 
         st.subheader("Quadro Geral")
         m1, m2, m3 = st.columns(3)
@@ -213,7 +213,7 @@ def main_app():
         with m2:
             st.metric(label="Colaboradores", value="2.000", delta="+100", delta_color="normal")
         with m3:
-            st.metric(label="Target de Receita", value="R$ 2B - 5B", delta="+300M", delta_color="normal")
+            st.metric(label="Expectativa de Receita Anual", value="R$ 2B - 5B", delta="+300M", delta_color="normal")
 
         st.divider()
 
@@ -290,8 +290,8 @@ def main_app():
             )
         st.markdown('</div>', unsafe_allow_html = True)
 
-    # Section: Análise Exploratória
-    elif st.session_state.current_section == "Análise Exploratória":
+    # Section: Sumário Executivo
+    elif st.session_state.current_section == "Sumário Executivo":
 
         st.markdown('<div class="graph-container">', unsafe_allow_html = True)
         st.plotly_chart(con.figure1, use_container_width = True)
@@ -347,8 +347,8 @@ def main_app():
         st.markdown(f"<p id='description-text'>{con.description8}</p>", unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html = True)        
 
-    # Section: Forecasting e Relacionados
-    elif st.session_state.current_section == "Forecasting":
+    # Section: Projeção Gerencial
+    elif st.session_state.current_section == "Projeção Gerencial":
 
         st.markdown('<div class="graph-container">', unsafe_allow_html = True)
         st.plotly_chart(con.figure9, use_container_width = True)
@@ -405,8 +405,8 @@ def main_app():
         st.markdown(f"<p id='description-text'>{con.description14}</p>", unsafe_allow_html=True)
         st.markdown('</div>', unsafe_allow_html = True)
 
-    # Section: Avaliação de Desempenho
-    elif st.session_state.current_section == "Avaliação":
+    # Section: Viabilidade Econômica
+    elif st.session_state.current_section == "Viabilidade Econômica":
 
         st.markdown('<div class="graph-container">', unsafe_allow_html = True)
         st.plotly_chart(con.figure15, use_container_width = True)
@@ -421,8 +421,8 @@ def main_app():
         st.markdown('</div>', unsafe_allow_html = True)
 
 
-    # Section: Contato
-    elif st.session_state.current_section == "Contato":
+    # Section: Contatos
+    elif st.session_state.current_section == "Contatos":
 
         st.markdown("""
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">

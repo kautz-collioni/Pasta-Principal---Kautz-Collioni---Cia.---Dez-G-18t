@@ -1,7 +1,7 @@
 section[data-testid="stSidebar"][aria-expanded="true"] {
-    width: 250px !important;
-    min-width: 250px !important;
-    max-width: 250px !important;
+    width: 270px !important;
+    min-width: 270px !important;
+    max-width: 270px !important;
 }
 
 .user-greeting {
