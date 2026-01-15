@@ -197,7 +197,7 @@ sales_summary = database_revenue.groupby(["item", "price"]).size().reset_index(n
 figure1 = px.scatter(
     sales_summary, x = "quantity_sold", y = "price", color = "item", trendline = "ols",
     labels = {"price": "Preço (R$)", "quantity_sold": "Quantidade Vendida", "item": "Item"},
-    title = "Análise Exploratória — Demandas Inversas", width = 1000, height = 500
+    title = "Sumário Executivo — Demandas Inversas", width = 1000, height = 500
 )
 
 figure1.update_layout(
@@ -210,12 +210,12 @@ figure1.update_layout(
 
 # figure1.show()
 
-description1 = "<b>Descrição:</b> Modela a aceitação do público, mostrando os preços que os consumidores estão dispostos a pagar conforme a oferta disponível."
+description1 = "<b>Descrição:</b> modela a aceitação do público, mostrando os preços que os consumidores estão dispostos a pagar conforme a oferta disponível."
 
 figure2 = px.violin(
     database_revenue, x = "item",  y = "price", color = "item", box = False, points = "all",
     labels = {"price": "Preço (R$)", "item": "Item"},
-    title = "Análise Exploratória — Distribuições de Preços", width = 1000, height = 500
+    title = "Sumário Executivo — Distribuições de Preços", width = 1000, height = 500
 )
 
 figure2.update_layout(
@@ -228,7 +228,7 @@ figure2.update_layout(
 
 # figure2.show()
 
-description2 = "(...)."
+description2 = "<b>Descrição:</b> representa a densidade das observações, utilizando a largura da forma para evidenciar os valores mais comuns dentro da amostra."
 
 elasticities = []
 
@@ -262,7 +262,7 @@ figure3 = px.bar(
     elasticities,
     x = "item", y = "current_elasticity", color = "item",
     labels = {"item": "Item", "current_elasticity": "Nível"},
-    title = "Análise Exploratória — Elasticidades-preço da Demanda Atuais", width = 1000, height = 500
+    title = "Sumário Executivo — Elasticidades-preço da Demanda Atuais", width = 1000, height = 500
 )
 
 for index, row in elasticities.iterrows():
@@ -287,7 +287,7 @@ figure3.update_layout(
 
 # figure3.show()
 
-description3 = "Quantifica a sensibilidade dos consumidores às variações nos preços; valores mais elevados indicam maior reatividade e exigem prudência."
+description3 = "<b>Descrição:</b> quantifica a sensibilidade dos consumidores às variações nos preços; valores mais elevados indicam maior reatividade e exigem prudência."
 
 accumulated_revenue = (database_revenue.groupby(["date", "item"])["price"]
                  .sum().groupby(level = 1 ).cumsum().reset_index(name = "accumulated_revenue"))
@@ -296,7 +296,7 @@ accumulated_revenue["accumulated_revenue"] /= 1000
 
 figure4 = px.line(accumulated_revenue, x = "date", y = "accumulated_revenue", color = "item",
                labels = {"date": "Data", "accumulated_revenue": "Receita Acumulada (mil R$)", "item": "Item"},
-               title = "Análise Exploratória — Receitas Acumuladas", width = 1000, height = 500)
+               title = "Sumário Executivo — Receitas Acumuladas", width = 1000, height = 500)
 
 figure4.update_layout(
     title_font_size = 18, font = dict(size = 14, family = "Arial", color = "black"),
@@ -308,7 +308,7 @@ figure4.update_layout(
 
 # figure4.show()
 
-description4 = "Avalia o desempenho segmentado do portfólio, evidenciando, para cada item, progressão, estabilidade ou estagnação da receita acumulada associada."
+description4 = "<b>Descrição:</b> avalia o desempenho segmentado do portfólio, evidenciando, para cada item, progressão, estabilidade ou estagnação da receita acumulada associada."
 
 daily_revenue = (database_revenue.groupby(["date", "item"])["price"]
                  .sum().reset_index(name = "daily_revenue"))
@@ -316,7 +316,7 @@ daily_revenue = (database_revenue.groupby(["date", "item"])["price"]
 figure5 = px.line(
     daily_revenue, x = "date", y = "daily_revenue", color = "item",
     labels = {"date": "Data", "daily_revenue": "Receita Diária (R$)", "item": "Item"},
-    title = "Análise Exploratória — Receitas Diárias", width = 1000, height = 500
+    title = "Sumário Executivo — Receitas Diárias", width = 1000, height = 500
 )
 
 figure5.update_layout(
@@ -329,7 +329,7 @@ figure5.update_layout(
 
 # figure5.show()
 
-description5 = "Descreve a contribuição relativa de cada item ao resultado, destacando os momentos de aceleração e declínio em cada faturamento diário."
+description5 = "<b>Descrição:</b> descreve a contribuição relativa de cada item ao resultado, destacando os momentos de aceleração e declínio em cada faturamento diário."
 
 database_revenue["date"] = pd.to_datetime(database_revenue["date"])
 
@@ -344,7 +344,7 @@ weekdays_revenue["weekday"] = pd.Categorical(weekdays_revenue["weekday"], ordere
 figure6 = px.line(
     weekdays_revenue, x = "date", y = "weekdays_revenue", color = "weekday",
     labels = {"date": "Data", "weekdays_revenue": "Receita Média (R$)", "weekday": "Dia da Semana"},
-    title = "Análise Exploratória — Receitas Médias por Dia da Semana", width = 1000, height = 500
+    title = "Sumário Executivo — Receitas Médias por Dia da Semana", width = 1000, height = 500
 )
 
 figure6.update_layout(
@@ -359,7 +359,7 @@ figure6.update_layout(
 
 # figure6.show()
 
-description6 = "Expõe o ritmo diário de geração de receitas, auxiliando na identificação de ciclos e descontinuidades nas atividades."
+description6 = "<b>Descrição:</b> expõe o ritmo diário de geração de receitas, auxiliando na identificação de ciclos e descontinuidades nas atividades."
 
 daily_revenue = (database_revenue.groupby(["date", "item"])["price"]
                  .sum().reset_index(name="daily_revenue"))
@@ -379,7 +379,7 @@ figure7 = px.area(
     weekly_revenue, 
     x = "date", y = "percentage_revenue", color = "item",
     labels = {"date": "Data", "percentage_revenue": "Participação", "item": "Item"},
-    title = "Análise Exploratória — Composição Dinâmica da Receita Total", width = 1000, height = 500
+    title = "Sumário Executivo — Composição Dinâmica da Receita Total", width = 1000, height = 500
 )
 
 figure7.update_layout(
@@ -394,7 +394,7 @@ figure7.update_layout(
 
 # figure7.show()
 
-description7 = "Mostra a distribuição percentual da receita total no decorrer do tempo, ponderando a relevância de cada item no total arrecadado."
+description7 = "<b>Descrição:</b> mostra a distribuição percentual da receita total no decorrer do tempo, ponderando a relevância de cada item no total arrecadado."
 
 database_employees["date"] = pd.to_datetime(database_employees["date"], format = "%d/%m/%Y")
 current_year = database_employees["date"].dt.year.max()
@@ -409,7 +409,7 @@ figure8 = px.bar(
     employee_summary,
     x = "position", y = "employee_count", color = "position",
     labels = {"position": "Cargo", "employee_count": "Número de Funcionários"},
-    title = "Análise Exploratória — Funcionários por Cargo e Salários Médios", width = 1000, height = 500
+    title = "Sumário Executivo — Funcionários por Cargo e Salários Médios", width = 1000, height = 500
 )
 
 for index, row in employee_summary.iterrows():
@@ -434,7 +434,7 @@ figure8.update_layout(
 
 # figure8.show()
 
-description8 = "Expõe os salários médios dos funcionários por cargo no ano atual, salientando as funções que acarretam maior impacto financeiro na operação."
+description8 = "<b>Descrição:</b> expõe os salários médios dos funcionários por cargo no ano atual, salientando as funções que acarretam maior impacto financeiro na operação."
 
 optimal_prices = []
 gam_results = {}
@@ -517,11 +517,11 @@ for item in sales_summary["item"].unique():
     buttons.append({
         "label": item, "method": "update",
         "args": [{"visible": [item == coffee for coffee in sales_summary["item"].unique() for _ in range(4)],
-                  "title": f"Forecasting e Relacionados — Generalized Additive Model (GAM)"}]
+                  "title": f"Projeção Gerencial — Generalized Additive Model (GAM)"}]
     })
 
 figure9.update_layout(
-    title = f"Forecasting e Relacionados — Generalized Additive Model (GAM)",
+    title = f"Projeção Gerencial — Generalized Additive Model (GAM)",
     title_font_size = 18, font = dict(size = 14, family = "Arial", color = "black"),
     width = 1000, height = 500, plot_bgcolor = "white", paper_bgcolor = "white",
     xaxis = dict(title = "Preço (R$)", showgrid = True, gridcolor = "lightgrey", 
@@ -540,7 +540,7 @@ figure9.update_layout(
 
 # figure9.show()
 
-description9 = "Utiliza um algoritmo especializado para determinar preços ideais, calibrado pela receptividade histórica dos consumidores."
+description9 = "<b>Descrição:</b> utiliza um algoritmo especializado para determinar preços ideais, calibrado pela receptividade histórica dos consumidores."
 
 optimal_elasticities = []
 
@@ -581,7 +581,7 @@ figure10 = px.bar(
     optimal_elasticities,
     x = "item", y = "optimal_elasticity", color = "item",
     labels = {"item": "Item", "optimal_elasticity": "Nível"},
-    title = "Forecasting e Relacionados — Elasticidades-preço da Demanda Ótimas", width = 1000, height = 500
+    title = "Projeção Gerencial — Elasticidades-preço da Demanda Ótimas", width = 1000, height = 500
 )
 
 for index, row in optimal_elasticities.iterrows():
@@ -606,7 +606,7 @@ figure10.update_layout(
 
 # figure10.show()
 
-description10 = "(...)."
+description10 = "<b>Descrição:</b> reflete a precificação otimizada; quando o índice se estabiliza próximo a um, o negócio captura o melhor retorno financeiro sem comprometer o volume de vendas."
 
 daily_revenue = (database_revenue.groupby(["date", "item"])["price"]
                  .sum().reset_index(name = "daily_revenue"))
@@ -709,7 +709,7 @@ for index, item in enumerate(items_list):
     ))
 
 figure11.update_layout(
-    title = f"Forecasting e Relacionados — Tendência, Sazonalidade e Resíduo da Receita Total",
+    title = f"Projeção Gerencial — Tendência, Sazonalidade e Resíduo da Receita Total",
     title_font_size = 18,
     font = dict(size = 14, family = "Arial", color = "black"),
     width = 1000, height = 700,
@@ -741,7 +741,7 @@ figure11.update_yaxes(title_text = "Nível", showgrid = True, gridcolor = "light
 
 # figure11.show()
 
-description11 = "Decompõe a receita total em tendência, sazonalidade e resíduo, proporcionando um diagnóstico detalhado do desempenho do negócio."
+description11 = "<b>Descrição:</b> decompõe a receita total em tendência, sazonalidade e resíduo, proporcionando um diagnóstico detalhado do desempenho do negócio."
 
 comparison_table = pd.DataFrame(optimal_prices)
 
@@ -815,14 +815,6 @@ figure12.add_trace(go.Bar(
     marker_color = "#ef553b",
 ))
 
-figure12.add_trace(go.Scatter(
-    x = cash_flow["date"],
-    y = cash_flow["net_margin_percentage"],
-    name = "Margem Líquida",
-    line = dict(color = "darkgray", width = 3, dash = "dot"),
-    yaxis = "y2"
-))
-
 for index, row in cash_flow.iterrows():
     figure12.add_annotation(
         x = row["date"], y = row["monthly_revenue"],
@@ -842,43 +834,35 @@ for index, row in cash_flow.iterrows():
     )
 
 figure12.update_layout(
-    title = "Fluxo de Caixa e Estoque — Movimentações Mensais",
+    title = "Fluxo de Caixa — Movimentações Mensais",
     xaxis_title = "Data",
     yaxis_title = "Movimentação (mil R$)",
-    yaxis2 = dict(
-        title = "Margem Líquida (%)",
-        overlaying = "y",
-        side = "right",
-        range = [cash_flow["net_margin_percentage"].min() - 10, cash_flow["net_margin_percentage"].max() + 10],
-        title_font_size = 14
-    ),
     title_font_size = 18,
     font = dict(size = 14, family = "Arial", color = "black"),
     plot_bgcolor = "white",
     paper_bgcolor = "white",
-    legend = dict(title = "", font_size = 12, bgcolor = "rgba(0,0,0,0)",
-                  x = 1.1, y = 1, xanchor = "left", yanchor = "top"),
+    legend = dict(title = "", font_size = 12, bgcolor = "rgba(0,0,0,0)"),
     xaxis = dict(
-        showgrid = True, 
-        gridcolor = "lightgrey", 
-        zeroline = False, 
+        showgrid = True,
+        gridcolor = "lightgrey",
+        zeroline = False,
         title_font_size = 14,
         tickformat = "%m/%Y",
         dtick = "M1"
     ),
     yaxis = dict(
-        showgrid = True, 
-        gridcolor = "lightgrey", 
-        zeroline = False, 
+        showgrid = True,
+        gridcolor = "lightgrey",
+        zeroline = False,
         title_font_size = 14
     ),
     barmode = "relative",
     width = 1000, height = 500
 )
 
-# figure16.show()
+# figure12.show()
 
-description12 = "Detalha a sequência de recebimentos e desembolsos, orientando ajustes compatíveis com a capacidade de geração de recursos."
+description12 = "<b>Descrição:</b> detalha a sequência de recebimentos e desembolsos, orientando ajustes compatíveis com a capacidade de geração de recursos."
 
 database_balance_accounts.set_index("heading", inplace = True)
 database_balance_accounts = database_balance_accounts.apply(pd.to_numeric, errors = "coerce")
@@ -931,7 +915,7 @@ figure13.add_trace(go.Scatter(
 ))
 
 figure13.update_layout(
-    title = "Fluxo de Caixa e Estoque — Indicadores de Liquidez",
+    title = "Fluxo de Caixa — Indicadores de Liquidez",
     title_font_size = 18,
     font = dict(size = 14, family = "Arial", color = "black"),
     plot_bgcolor = "white",
@@ -972,7 +956,7 @@ figure13.add_annotation(
 
 # figure13.show()
 
-description13 = "Viabiliza uma leitura estruturada da folga financeira, discriminando fontes de liquidez mais e menos conversíveis."
+description13 = "<b>Descrição:</b> viabiliza uma leitura estruturada da folga financeira, discriminando fontes de liquidez mais e menos conversíveis."
 
 daily_sales_quantity = database_revenue.groupby(["date", "item"]).size().reset_index(name = "quantity_sold")
 daily_sales_quantity["date"] = pd.to_datetime(daily_sales_quantity["date"])
@@ -1047,7 +1031,7 @@ figure14 = px.line(
         "cumulative_inventory_balance": "Saldo Acumulado (Unidades)", 
         "item": "Item"
     },
-    title = "Fluxo de Caixa e Estoque — Evolução Diária do Estoque por Item", 
+    title = "Fluxo de Caixa — Evolução Diária do Estoque por Item", 
     width = 1000, 
     height = 500
 )
@@ -1079,20 +1063,20 @@ figure14.update_layout(
 
 # figure14.show()
 
-description14 = "Apresenta evidências para calibrar volumes de reposição e reduzir desperdícios, minimizando interrupções e perdas evitáveis."
+description14 = "<b>Descrição:</b> apresenta evidências para calibrar volumes de reposição e reduzir desperdícios, minimizando interrupções e perdas evitáveis."
 
 def obtain_npv(attractive_rate, cash_flow):
     return sum(dough / (1 + attractive_rate) ** time for time, dough in enumerate(cash_flow))
 
 def measure_irr(cash_flow, guess = 0.1, tolerance = 1e-5):
-    adjustment_rate, step = guess, 0.0001
+    adjustment_rate, step = guess, 0.01
 
     for _ in range(1000):
         temporary_npv = obtain_npv(adjustment_rate, cash_flow)
         if abs(temporary_npv) < tolerance:
             return adjustment_rate
         adjustment_rate += step if temporary_npv > 0 else - step
-        step *= 0.09
+        step *= 0.9
 
     raise ValueError("Mude o palpite!")
 
@@ -1106,13 +1090,13 @@ def compute_discounted_payback(cash_flow, discount_rate):
     accumulated = 0
     
     for time, amount in enumerate(cash_flow):
-        discounted = amount / (1 + discount_rate) ** time
+        present_value = amount / (1 + discount_rate) ** time
         
-        if accumulated + discounted < 0:
-            accumulated += discounted
+        if accumulated + present_value < 0:
+            accumulated += present_value
             continue
         
-        fraction = abs(accumulated) / discounted if discounted != 0 else 0
+        fraction = abs(accumulated) / present_value if present_value != 0 else 0
         return time - 1 + fraction
     
     return None
@@ -1142,13 +1126,13 @@ def get_ipca_12_months():
     else:
         raise Exception("Falha ao acessar o Índice Nacional de Preços ao Consumidor Amplo (IPCA)!")
 
-cash_flow = [-1200, 600, 600, 600, 600, -1200, 900, 900, 900, 900]
+cash_flow = [-1250, 700, 700, 700, 700, -2500, 1400, 1400, 1400, 1400]
 attractive_rate = get_selic_rate()
 financing_rate = get_selic_rate() * 1.75
 reinvestment_rate = get_ipca_12_months() + 0.05
 
 # print("Payback descontado:", f"{compute_discounted_payback(cash_flow, attractive_rate):,.2f}".replace(",", ".").replace(".", ",", 1))
-# print("Valor Presente Líquido (VPL): R$", f"{obtain_npv(attractive_rate, cash_flow):,.2f}".replace(",", ".").replace(".", ",", 1))
+# print("Valor Presente Líquido (VPL): R$", f"{obtain_npv(attractive_rate, cash_flow):,.2f}".replace(",", "_").replace(".", ",").replace("_", "."))
 # print("Taxa Interna de Retorno (TIR):", f"{measure_irr(cash_flow) * 100:,.2f}".replace(",", ".").replace(".", ",", 1) + "%")
 # print("Taxa Interna de Retorno Modificada (TIRM):", f"{discover_mirr(cash_flow, financing_rate, reinvestment_rate) * 100:,.2f}".replace(",", ".").replace(".", ",", 1) + "%")
 
@@ -1163,8 +1147,8 @@ sensitivity = pd.DataFrame({
 figure15 = px.line(
     sensitivity,
     x = "Taxa Básica de Juros", y = "Valor Presente Líquido (VPL)",
-    labels = {"Taxa Básica de Juros", "Valor Presente Líquido (VPL)"},
-    title = "Avaliação de Desempenho — Atratividade Econômico-financeira",
+    labels = {"Taxa Básica de Juros": "Taxa Básica de Juros", "Valor Presente Líquido (VPL)": "Valor Presente Líquido (R$)"},
+    title = "Viabilidade Econômica — Atratividade Econômico-financeira",
     width = 1000, height = 500
 )
 
@@ -1186,7 +1170,7 @@ figure15.add_trace(
         y = [current_npv],
         mode = "markers+text",
         marker = dict(size = 8, color = "#349185", symbol = "circle"),
-        text = [f"Taxa Básica de Juros: {attractive_rate:.0%}<br>Valor Presente Líquido (VPL): R$ {current_npv:,.0f}".replace(".", ",")],
+        text = [f"Taxa Básica de Juros: {attractive_rate:.0%}<br>Valor Presente Líquido (VPL): R$ {current_npv:,.0f}".replace(",", "_").replace(".", ",").replace("_", ".")],
         textposition = "top right",
     )
 )
@@ -1204,76 +1188,73 @@ figure15.update_layout(
 
 # figure15.show()
 
-description15 = "(...)."
+description15 = "<b>Descrição:</b> emonstra o potencial de geração de valor de um projeto frente à variação do custo de capital, sustentando a decisão de investimento."
 
 discounted_path = []
 accumulated = 0
 
 for time, amount in enumerate(cash_flow):
-    discounted = amount / (1 + attractive_rate) ** time
-    accumulated += discounted
+    present_value = amount / (1 + attractive_rate) ** time
+    accumulated += present_value
     discounted_path.append(accumulated)
 
 discounted_payback = compute_discounted_payback(cash_flow, attractive_rate)
 
 payback_point = pd.DataFrame({
-    "time": [discounted_payback],
-    "value": [0]
+    "Tempo": [discounted_payback],
+    "Valor": [0]
 })
 
-path_df = pd.DataFrame({
-    "time": range(len(discounted_path)),
-    "value": discounted_path
+discounted_path = pd.DataFrame({
+    "Tempo": range(len(discounted_path)),
+    "Valor": discounted_path
 })
 
 figure16 = px.line(
-    path_df,
-    x="time", y="value",
-    labels={"time": "Período", "value": "Valor Acumulado Descontado (R$)"},
-    title="Avaliação de Desempenho — Payback Descontado",
-    width=1000, height=500
+    discounted_path,
+    x = "Tempo", y = "Valor",
+    labels = {"Tempo": "Período", "Valor": "Valor Acumulado Descontado (R$)"},
+    title = "Viabilidade Econômica — Payback Descontado",
+    width = 1000, height = 500
 )
 
-# --- Saia abaixo da linha (cor #ffa15a, opacidade menor)
 figure16.add_trace(
     go.Scatter(
-        x = path_df["time"].tolist() + path_df["time"].tolist()[::-1],
-        y = path_df["value"].tolist() + [min(path_df["value"])] * len(path_df),
+        x = discounted_path["Tempo"].tolist() + discounted_path["Tempo"].tolist()[::-1],
+        y = discounted_path["Valor"].tolist() + [min(discounted_path["Valor"])] * len(discounted_path),
         fill = "toself",
-        fillcolor = "rgba(255, 161, 90, 0.35)",  # cor com menor opacidade
+        fillcolor = "rgba(255, 161, 90, 0.35)",
         line = dict(color = "rgba(0,0,0,0)"),
         hoverinfo = "skip",
         showlegend = False
     )
 )
 
-# Payback point marker
 figure16.add_trace(
     go.Scatter(
-        x=payback_point["time"],
-        y=payback_point["value"],
-        mode="markers+text",
-        marker=dict(size=10, color="#ffa15a", symbol="diamond"),
-        text=[f"Payback Descontado: {discounted_payback:.2f} períodos".replace(".", ",")],
-        textposition="top right",
-        showlegend=False
+        x = payback_point["Tempo"],
+        y = payback_point["Valor"],
+        mode = "markers+text",
+        marker = dict(size = 10, color = "#e77015", symbol = "diamond"),
+        text = [f"Payback Descontado: {discounted_payback:.2f} períodos".replace(".", ",")],
+        textposition = "top right",
+        showlegend = False
     )
 )
 
-# Linha principal no novo tom
-figure16.update_traces(line=dict(color="#ffa15a"))
+figure16.update_traces(line = dict(color = "#ffa15a"))
 
 figure16.update_layout(
-    title_font_size=18,
-    font=dict(size=14, family="Arial", color="black"),
-    plot_bgcolor="white",
-    paper_bgcolor="white",
-    showlegend=False,
-    xaxis=dict(showgrid=True, gridcolor="lightgrey", zeroline=False),
-    yaxis=dict(showgrid=True, gridcolor="lightgrey", zeroline=False, tickformat=",.0f"),
-    separators=",."
+    title_font_size = 18,
+    font = dict(size = 14, family = "Arial", color = "black"),
+    plot_bgcolor = "white",
+    paper_bgcolor = "white",
+    showlegend = False,
+    xaxis = dict(showgrid = True, gridcolor = "lightgrey", zeroline = False),
+    yaxis = dict(showgrid = True, gridcolor = "lightgrey", zeroline = False, tickformat = ",.0f"),
+    separators = ",."
 )
 
 # figure16.show()
 
-description16 = "(...)."
+description16 = "<b>Descrição:</b> fornece o cronograma de recomposição do investimento sob o efeito do valor do dinheiro no tempo, orientando a gestão de riscos."

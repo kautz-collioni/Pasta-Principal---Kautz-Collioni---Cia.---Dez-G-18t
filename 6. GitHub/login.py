@@ -86,20 +86,22 @@ def login_page():
     except FileNotFoundError:
         st.markdown('<div class="login-logo"><h2>Kautz-Collioni & Cia.</h2></div>', unsafe_allow_html = True)
 
-    # Login form
-    username = st.text_input("Usuário", key = "user_login", on_change = lambda: None)
-    password = st.text_input("Senha", type = "password",  on_change = lambda: None)
+    with st.form("login_form", clear_on_submit=False):
 
-    # Login button
-    if st.button("Entrar", key = "login_btn", use_container_width = True):
-        if username == "João Silva" and password == "123":  # Credentials
-            st.success("Bem-vindo!")
-            time.sleep(1)
-            st.session_state.logged_in = True
-            st.session_state.username = username
-            st.switch_page("pages/application.py")
-        else:
-            st.error("Usuário ou senha incorretos!")
+        username = st.text_input("Usuário", key = "user_login")
+        password = st.text_input("Senha", type = "password")
+
+        submit_btn = st.form_submit_button("Entrar", key="login_btn",use_container_width=True)
+
+        if submit_btn:
+            if username == "João Silva" and password == "123":  # Credentials
+                st.success("Bem-vindo!")
+                time.sleep(1)
+                st.session_state.logged_in = True
+                st.session_state.username = username
+                st.switch_page("pages/application.py")
+            else:
+                st.error("Usuário ou senha incorretos!")
     
     # Footer
     st.markdown('<div style="margin-top: 1rem;"></div>', unsafe_allow_html = True)
